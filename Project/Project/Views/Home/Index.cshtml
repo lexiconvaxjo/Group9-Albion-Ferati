@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
+@if (Session["LoggedUser"] != null)
+{
+    <h2> Welcome @Session["LoggedUser"]</h2>
 }
-
-<h2>Index</h2>
-
