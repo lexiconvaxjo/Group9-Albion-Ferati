@@ -179,9 +179,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609211340060_init.cs" />
-    <Compile Include="Migrations\201609211340060_init.Designer.cs">
-      <DependentUpon>201609211340060_init.cs</DependentUpon>
+    <Compile Include="Migrations\201609211420328_init.cs" />
+    <Compile Include="Migrations\201609211420328_init.Designer.cs">
+      <DependentUpon>201609211420328_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -212,8 +212,8 @@
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609211340060_init.resx">
-      <DependentUpon>201609211340060_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609211420328_init.resx">
+      <DependentUpon>201609211420328_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
