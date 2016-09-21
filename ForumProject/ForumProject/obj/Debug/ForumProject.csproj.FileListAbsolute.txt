@@ -141,3 +141,4 @@ C:\Users\Albmiri\Desktop\Group9-Albion-Ferati\ForumProject\ForumProject\obj\Debu
 C:\Users\Albmiri\Desktop\Group9-Albion-Ferati\ForumProject\ForumProject\obj\Debug\ForumProject.Migrations.init.resources
 C:\Users\Albmiri\Desktop\Group9-Albion-Ferati\ForumProject\ForumProject\obj\Debug\ForumProject.csproj.GenerateResource.Cache
 C:\Users\Albmiri\Desktop\Group9-Albion-Ferati\ForumProject\ForumProject\obj\Debug\ForumProject.Migrations.TablesAdded.resources
+C:\Users\Albmiri\Desktop\Group9-Albion-Ferati\ForumProject\ForumProject\obj\Debug\ForumProject.Migrations.ChangedTableName.resources

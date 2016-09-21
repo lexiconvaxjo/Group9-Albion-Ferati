@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace ForumProject.Controllers
 {
@@ -48,6 +49,12 @@ namespace ForumProject.Controllers
             _userManager = userManager;
             _signIn = signIn;
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -58,8 +65,8 @@ namespace ForumProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("ErrorLogin", "Type your username or password");
-                return View();
+                ModelState.AddModelError("ErrorLogin", "Incorrect username or password");
+                return View(vm);
             }
 
             var status = SignIn.PasswordSignIn(vm.Username, vm.Password, false, false);
@@ -67,7 +74,8 @@ namespace ForumProject.Controllers
             switch (status)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index");
+                    Session.Add("Username", vm.Username);
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.Failure:
                     ModelState.AddModelError("ErrorLogin", "Incorrect username or password!");
                     return View();
@@ -76,34 +84,66 @@ namespace ForumProject.Controllers
 
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Register(RegisterViewModel vm)
         {
-            if (!ModelState.IsValid)
+
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("ErrorRegister", "Fill all required");
-                return View("Index");
+                var user = new ApplicationUser { UserName = vm.Username, Email = vm.Email };
+                var result = await UserManager.CreateAsync(user, vm.Password);
+                if (result.Succeeded)
+                {
+                    await SignIn.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    
+                    Session.Add("Username", vm.Username);
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
             }
 
-            var user = new ApplicationUser
+            // If we got this far, something failed, redisplay form
+            return View(vm);
+
+
+            //In workshop we did the following code
+            //if (!ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError("ErrorRegister", "Fill all required");
+            //    return View("Index");
+            //}
+
+            //var user = new ApplicationUser
+            //{
+            //    UserName = vm.Username,
+            //    Email = vm.Email
+            //};
+
+            //var create = await UserManager.CreateAsync(user, vm.Password);
+
+            ////var errors = create.Errors;
+
+            //if (create.Succeeded)
+            //{
+            //    //user is succefully registered, here you can write what you want to happen next
+            //    Session.Add("Username", user.UserName);
+            //    return View("Index");
+            //}
+            //return View("Index");
+        }
+
+        //Identity error method
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
             {
-                UserName = vm.Email,
-                Email = vm.Email
-            };
-
-            var create = await UserManager.CreateAsync(user, vm.Password);
-
-            var errors = create.Errors;
-
-            if (create.Succeeded)
-            {
-                //user is succefully registered, here you can write what you want to happen next
+                ModelState.AddModelError("", error);
             }
-
-
-
-
-            return View("Index");
         }
     }
 }
