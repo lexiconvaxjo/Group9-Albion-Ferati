@@ -54,7 +54,7 @@ namespace ForumProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(LoginViewModel vm)
+        public ActionResult Login(LoginViewModel vm)
         {
             if (!ModelState.IsValid)
             {
