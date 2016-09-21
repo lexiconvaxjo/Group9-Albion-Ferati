@@ -36,5 +36,9 @@ namespace ForumProject.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ForumProject.Models.ViewModels.LoginViewModel> LoginViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<ForumProject.Models.ViewModels.RegisterViewModel> RegisterViewModels { get; set; }
     }
 }
