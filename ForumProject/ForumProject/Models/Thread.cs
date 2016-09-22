@@ -14,7 +14,9 @@ namespace ForumProject.Models
         public string ThreadName { get; set; }
 
         public string ThreadContent { get; set; }
-        
+
+        public Section Section { get; set; }
+
         public List<Reply> ThreadReplies { get; set; }
     }
 }
