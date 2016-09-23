@@ -12,10 +12,6 @@ namespace ForumProject.Models.ViewModels
         public string Name { get; set; }
 
         public string Content { get; set; }
-
-        public ApplicationUser User { get; set; }
-
-        public Section Section { get; set; }
     }
 
     

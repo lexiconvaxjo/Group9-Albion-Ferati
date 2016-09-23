@@ -6,6 +6,9 @@
 
 <h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "CreateSection")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -14,12 +17,12 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.SectionName, "Threads", new { @id = item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.SectionName, "Threads", new { @id = item.Id })
+            </td>
+        </tr>
+    }
 </table>

@@ -12,7 +12,7 @@ namespace ForumProject.Controllers
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
 
-        private int _sectionId;
+        private Section _choosenSection = new Section();
 
         // GET: Forum
         public ActionResult Index()
@@ -21,17 +21,14 @@ namespace ForumProject.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Index(CreateSectionViewModel vm)
-        {
-            return View();
-        }
-
         //---------------------------------------------------------------
         public ActionResult Threads(int id)
         {
-            _sectionId = id;
-            var model = _context.Threads.Where(x => x.Section.Id.Equals(id)).ToList();
+            var model = _context.Threads.Where(x => x.Section.Id.Equals(id));
+
+            var theSection = _context.Sections.ToList().Where(x => x.Id.Equals(id));
+
+            _choosenSection = theSection.FirstOrDefault(x => x.Id == id);
             
             return View(model);
         }
@@ -52,30 +49,62 @@ namespace ForumProject.Controllers
         [HttpPost]
         public ActionResult CreateThread(CreateThreadViewModel vm)
         {
-            var model = _context.Sections.FirstOrDefault(x => x.Id.Equals(_sectionId));
             Thread thread = new Thread
             {
                 ThreadName = vm.Name,
-                ThreadContent = vm.Content,
-                Section = model
+                ThreadContent = vm.Content
             };
+            
+            _choosenSection.SectionThreads.Add(thread);
+
             _context.Threads.Add(thread);
-            _context.SaveChanges();
+
 
             var modelList = _context.Threads.ToList();
+
+            _context.SaveChanges();
             return View("Threads", modelList);
         }
 
-        //---------------------------------------------------------------------------------
-        public ActionResult Replies()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //-------------------------------------------------------------------------------
+
+        public ActionResult CreateSection()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Replies(Reply reply)
+        public ActionResult CreateSection(CreateSectionViewModel vm)
         {
-            return View();
+            Section section = new Section
+            {
+                SectionName = vm.SectionName
+            };
+            var model = _context.Sections.Add(section);
+            _context.SaveChanges();
+
+            var modelList = _context.Sections.ToList();
+
+            return View("Index", modelList);
         }
     }
 }

@@ -210,6 +210,14 @@
     <Compile Include="Migrations\201609231607280_sectionVM.Designer.cs">
       <DependentUpon>201609231607280_sectionVM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609231619541_init2.cs" />
+    <Compile Include="Migrations\201609231619541_init2.Designer.cs">
+      <DependentUpon>201609231619541_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609231730337_ctvmUpdate.cs" />
+    <Compile Include="Migrations\201609231730337_ctvmUpdate.Designer.cs">
+      <DependentUpon>201609231730337_ctvmUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Reply.cs" />
@@ -242,6 +250,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Forum\CreateThread.cshtml" />
+    <Content Include="Views\Forum\CreateSection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -255,6 +264,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609231607280_sectionVM.resx">
       <DependentUpon>201609231607280_sectionVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609231619541_init2.resx">
+      <DependentUpon>201609231619541_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609231730337_ctvmUpdate.resx">
+      <DependentUpon>201609231730337_ctvmUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
