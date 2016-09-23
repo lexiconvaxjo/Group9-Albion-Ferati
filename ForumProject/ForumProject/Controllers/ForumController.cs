@@ -12,6 +12,8 @@ namespace ForumProject.Controllers
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
 
+        private int _sectionId;
+
         // GET: Forum
         public ActionResult Index()
         {
@@ -24,6 +26,7 @@ namespace ForumProject.Controllers
         //---------------------------------------------------------------
         public ActionResult Threads(int id)
         {
+            _sectionId = id;
             var model = _context.Threads.Where(x => x.Section.Id.Equals(id)).ToList();
             
             return View(model);
@@ -45,12 +48,12 @@ namespace ForumProject.Controllers
         [HttpPost]
         public ActionResult CreateThread(CreateThreadViewModel vm)
         {
+            var model = _context.Sections.FirstOrDefault(x => x.Id.Equals(_sectionId));
             Thread thread = new Thread
             {
                 ThreadName = vm.Name,
                 ThreadContent = vm.Content,
-                UserThatPosted = vm.User,
-                Section = vm.Section
+                Section = model
             };
             _context.Threads.Add(thread);
             _context.SaveChanges();
