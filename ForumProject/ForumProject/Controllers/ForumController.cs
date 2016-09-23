@@ -22,10 +22,10 @@ namespace ForumProject.Controllers
 
 
         //---------------------------------------------------------------
-        public ActionResult Threads(int SectionId)
+        public ActionResult Threads(int id)
         {
-            var model = _context.Threads.Where(x => x.Section.Id.Equals(SectionId)).ToList();
-            _context.SaveChanges();
+            var model = _context.Threads.Where(x => x.Section.Id.Equals(id)).ToList();
+            
             return View(model);
         }
 
@@ -48,11 +48,13 @@ namespace ForumProject.Controllers
             Thread thread = new Thread
             {
                 ThreadName = vm.Name,
-                ThreadContent = vm.Content
-
+                ThreadContent = vm.Content,
+                UserThatPosted = vm.User,
+                Section = vm.Section
             };
             _context.Threads.Add(thread);
             _context.SaveChanges();
+
             var modelList = _context.Threads.ToList();
             return View("Threads", modelList);
         }

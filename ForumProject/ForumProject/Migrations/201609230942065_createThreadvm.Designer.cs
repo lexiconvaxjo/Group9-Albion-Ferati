@@ -7,13 +7,13 @@ namespace ForumProject.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class teamvm : IMigrationMetadata
+    public sealed partial class createThreadvm : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(teamvm));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(createThreadvm));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609220901426_teamvm"; }
+            get { return "201609230942065_createThreadvm"; }
         }
         
         string IMigrationMetadata.Source

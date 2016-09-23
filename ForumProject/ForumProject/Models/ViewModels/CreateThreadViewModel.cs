@@ -13,26 +13,9 @@ namespace ForumProject.Models.ViewModels
 
         public string Content { get; set; }
 
+        public ApplicationUser User { get; set; }
 
-        //public static implicit operator CreateThreadViewModel(Thread thread)
-        //{
-        //    return new  CreateThreadViewModel
-        //    {
-        //        Id = thread.Id,
-        //        Name = thread.ThreadName,
-        //        Content = thread.ThreadContent
-        //    };
-        //}
-
-        //public static implicit operator Thread(CreateThreadViewModel vm)
-        //{
-        //    return new Thread
-        //    {
-        //        Id = vm.Id,
-        //        ThreadName = vm.Name,
-        //        ThreadContent = vm.Content
-        //    };
-        //}
+        public Section Section { get; set; }
     }
 
     

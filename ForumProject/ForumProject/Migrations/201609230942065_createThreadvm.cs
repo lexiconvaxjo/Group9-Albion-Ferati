@@ -3,7 +3,7 @@ namespace ForumProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class stuff : DbMigration
+    public partial class createThreadvm : DbMigration
     {
         public override void Up()
         {

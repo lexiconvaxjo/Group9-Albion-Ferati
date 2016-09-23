@@ -10,6 +10,7 @@
     <WebStackScaffolding_DbContextTypeFullName>ForumProject.Models.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
