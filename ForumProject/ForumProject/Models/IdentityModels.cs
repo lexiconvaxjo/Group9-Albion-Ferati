@@ -44,6 +44,8 @@ namespace ForumProject.Models
 
         public DbSet<Team> Teams { get; set; }
 
+        public DbSet<Section> Sections { get; set; }
+
         public DbSet<Thread> Threads { get; set; }
 
         public DbSet<Reply> Replies { get; set; }

@@ -13,6 +13,7 @@ namespace ForumProject.Controllers
 {
     public class AccountController : Controller
     {
+        private ApplicationDbContext _dbContext = new ApplicationDbContext();
         private ApplicationSignInManager _signIn;
         public ApplicationSignInManager SignIn
         {
@@ -50,10 +51,12 @@ namespace ForumProject.Controllers
             _signIn = signIn;
         }
 
-        public ActionResult Index()
+        public ActionResult ChooseTeam()
         {
-            return View();
+            var team = new Team();
+            return View(team);
         }
+
 
         public ActionResult Login()
         {
