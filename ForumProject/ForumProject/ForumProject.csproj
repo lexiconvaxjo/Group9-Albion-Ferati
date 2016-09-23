@@ -202,13 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609230906163_init.cs" />
-    <Compile Include="Migrations\201609230906163_init.Designer.cs">
-      <DependentUpon>201609230906163_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609230942065_createThreadvm.cs" />
-    <Compile Include="Migrations\201609230942065_createThreadvm.Designer.cs">
-      <DependentUpon>201609230942065_createThreadvm.cs</DependentUpon>
+    <Compile Include="Migrations\201609231518325_init.cs" />
+    <Compile Include="Migrations\201609231518325_init.Designer.cs">
+      <DependentUpon>201609231518325_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -249,13 +245,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609230906163_init.resx">
-      <DependentUpon>201609230906163_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609230942065_createThreadvm.resx">
-      <DependentUpon>201609230942065_createThreadvm.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609231518325_init.resx">
+      <DependentUpon>201609231518325_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -18,7 +18,6 @@ namespace ForumProject.Controllers
         public ActionResult Index()
         {
             var model = _context.Sections.ToList();
-            _context.SaveChanges();
             return View(model);
         }
 
