@@ -141,3 +141,4 @@ C:\Users\Albmiri\ForumProject\ForumProject\ForumProject\obj\Debug\ForumProject.d
 C:\Users\Albmiri\ForumProject\ForumProject\ForumProject\obj\Debug\ForumProject.pdb
 C:\Users\Albmiri\ForumProject\ForumProject\ForumProject\obj\Debug\ForumProject.Migrations.init.resources
 C:\Users\Albmiri\ForumProject\ForumProject\ForumProject\obj\Debug\ForumProject.csproj.GenerateResource.Cache
+C:\Users\Albmiri\ForumProject\ForumProject\ForumProject\obj\Debug\ForumProject.Migrations.sectionVM.resources

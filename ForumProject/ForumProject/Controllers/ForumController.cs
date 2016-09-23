@@ -21,6 +21,11 @@ namespace ForumProject.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Index(CreateSectionViewModel vm)
+        {
+            return View();
+        }
 
         //---------------------------------------------------------------
         public ActionResult Threads(int id)

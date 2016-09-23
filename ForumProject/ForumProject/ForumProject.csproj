@@ -206,12 +206,17 @@
     <Compile Include="Migrations\201609231518325_init.Designer.cs">
       <DependentUpon>201609231518325_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609231607280_sectionVM.cs" />
+    <Compile Include="Migrations\201609231607280_sectionVM.Designer.cs">
+      <DependentUpon>201609231607280_sectionVM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\Thread.cs" />
+    <Compile Include="Models\ViewModels\CreateSectionViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateThreadViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
@@ -247,6 +252,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609231518325_init.resx">
       <DependentUpon>201609231518325_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609231607280_sectionVM.resx">
+      <DependentUpon>201609231607280_sectionVM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
