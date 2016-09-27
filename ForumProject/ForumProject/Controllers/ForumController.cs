@@ -12,34 +12,24 @@ namespace ForumProject.Controllers
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
 
-        private Section _choosenSection = new Section();
-
         // GET: Forum
         public ActionResult Index()
         {
             var model = _context.Sections.ToList();
             return View(model);
         }
+        
 
-        //---------------------------------------------------------------
+
         public ActionResult Threads(int id)
         {
             var model = _context.Threads.Where(x => x.Section.Id.Equals(id));
-
-            var theSection = _context.Sections.ToList().Where(x => x.Id.Equals(id));
-
-            _choosenSection = theSection.FirstOrDefault(x => x.Id == id);
             
             return View(model);
         }
+        
 
-        [HttpPost]
-        public ActionResult Threads()
-        {
-            return View();
-        }
 
-        //--------------------------------------------------------------------------------
         public ActionResult CreateThread()
         {
 
@@ -54,15 +44,11 @@ namespace ForumProject.Controllers
                 ThreadName = vm.Name,
                 ThreadContent = vm.Content
             };
-            
-            _choosenSection.SectionThreads.Add(thread);
 
             _context.Threads.Add(thread);
-
-
-            var modelList = _context.Threads.ToList();
-
             _context.SaveChanges();
+            var modelList = _context.Threads.ToList();
+            
             return View("Threads", modelList);
         }
 

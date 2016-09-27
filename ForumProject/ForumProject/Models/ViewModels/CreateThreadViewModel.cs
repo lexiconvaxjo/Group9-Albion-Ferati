@@ -13,6 +13,4 @@ namespace ForumProject.Models.ViewModels
 
         public string Content { get; set; }
     }
-
-    
 }
