@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ForumProject.Controllers
 {
+    // Just for testing
     public class AccountController : Controller
     {
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
