@@ -1,0 +1,48 @@
+﻿@model ForumProject.Models.Thread
+
+@{
+    ViewBag.Title = "Thread";
+}
+
+<h2>Thread</h2>
+
+<p>
+    @Html.ActionLink("Reply", "Reply", new { @id = ViewBag.threadId })
+</p>
+<div>
+    <h4>Thread</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ThreadName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThreadName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThreadContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThreadContent)
+        </dd>
+
+    </dl>
+</div>
+
+@if (Model.ThreadReplies != null)
+{
+    foreach (var item in Model.ThreadReplies.Where(x => x.ThreadOfReply.Id.Equals(Model.Id)))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReplyContent)
+            </td>
+        </tr>
+    }
+}
+
+@Html.Partial("_Replies", Model.ThreadReplies);
+

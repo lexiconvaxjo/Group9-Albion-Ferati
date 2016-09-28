@@ -65,7 +65,5 @@ namespace ForumProject.Models
             modelBuilder.Entity<ApplicationUser>().ToTable("Users").Property(x => x.Id).HasColumnName("UserID");
             
         }
-
-        public System.Data.Entity.DbSet<ForumProject.Models.ViewModels.CreateSectionViewModel> CreateSectionViewModels { get; set; }
     }
 }

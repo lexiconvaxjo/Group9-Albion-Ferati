@@ -20,19 +20,27 @@ namespace ForumProject.Controllers
         }
         
 
-
-        public ActionResult Threads(int id)
+        public ActionResult ThreadList(int id)
         {
             var model = _context.Threads.Where(x => x.Section.Id.Equals(id));
-            
+            ViewBag.sectionId = id;
             return View(model);
         }
         
 
 
-        public ActionResult CreateThread()
+        public ActionResult Thread(int id)
         {
+            var model = _context.Threads.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            ViewBag.threadId = id;
+            return View(model);
+        }
 
+
+
+        public ActionResult CreateThread(int id)
+        {
+            ViewBag.sectionId = id;
             return View();
         }
 
@@ -42,19 +50,38 @@ namespace ForumProject.Controllers
             Thread thread = new Thread
             {
                 ThreadName = vm.Name,
-                ThreadContent = vm.Content
+                ThreadContent = vm.Content,
+                Section = _context.Sections.Where(x => x.Id.Equals(vm.SectionId)).FirstOrDefault()
             };
-
+            
             _context.Threads.Add(thread);
             _context.SaveChanges();
-            var modelList = _context.Threads.ToList();
             
-            return View("Threads", modelList);
+            return RedirectToAction("ThreadList", new { id = vm.SectionId });
         }
 
 
 
+        public ActionResult Reply(int id)
+        {
+            ViewBag.threadId = id;
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Reply(ReplyViewModel vm)
+        {
+            Reply reply = new Reply
+            {
+                ReplyContent = vm.ReplyContent,
+                ThreadOfReply = _context.Threads.Where(x => x.Id.Equals(vm.ThreadId)).FirstOrDefault()
+            };
+
+            _context.Replies.Add(reply);
+            _context.SaveChanges();
+
+            return RedirectToAction("Thread", new { id = vm.ThreadId });
+        }
 
 
 

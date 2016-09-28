@@ -1,0 +1,14 @@
+﻿@model List<ForumProject.Models.Reply>
+
+<h2>_Replies partial</h2>
+
+<table>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReplyContent)
+        </td>
+    </tr>
+}
+
+</table>

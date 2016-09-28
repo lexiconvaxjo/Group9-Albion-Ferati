@@ -12,5 +12,7 @@ namespace ForumProject.Models.ViewModels
         public string Name { get; set; }
 
         public string Content { get; set; }
+
+        public int SectionId { get; set; }
     }
 }

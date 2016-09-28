@@ -9,7 +9,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    <input type="hidden" name="SectionId" value="@ViewBag.sectionId" />
     <div class="form-horizontal">
         <h4>CreateThreadViewModel</h4>
         <hr />
