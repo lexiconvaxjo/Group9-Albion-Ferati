@@ -31,7 +31,7 @@ namespace ForumProject.Controllers
 
         public ActionResult Thread(int id)
         {
-            var model = _context.Threads.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            var model = _context.Threads.Include("ThreadReplies").Where(x => x.Id.Equals(id)).FirstOrDefault();
             ViewBag.threadId = id;
             return View(model);
         }

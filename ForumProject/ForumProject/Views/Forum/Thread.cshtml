@@ -32,17 +32,6 @@
     </dl>
 </div>
 
-@if (Model.ThreadReplies != null)
-{
-    foreach (var item in Model.ThreadReplies.Where(x => x.ThreadOfReply.Id.Equals(Model.Id)))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReplyContent)
-            </td>
-        </tr>
-    }
-}
 
-@Html.Partial("_Replies", Model.ThreadReplies);
+@Html.Partial("_Replies", Model.ThreadReplies)
 

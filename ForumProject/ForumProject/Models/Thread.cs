@@ -17,6 +17,6 @@ namespace ForumProject.Models
 
         public Section Section { get; set; }
 
-        public List<Reply> ThreadReplies { get; set; }
+        public virtual List<Reply> ThreadReplies { get; set; }
     }
 }
