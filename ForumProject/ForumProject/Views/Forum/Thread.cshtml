@@ -12,7 +12,7 @@
 <div>
     <h4>Thread</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="glyphicon-log-out">
         <dt>
             @Html.DisplayNameFor(model => model.ThreadName)
         </dt>
@@ -33,5 +33,7 @@
 </div>
 
 
-@Html.Partial("_Replies", Model.ThreadReplies)
+
+
+@Html.Partial("_Replies", Model.ThreadReplies)  
 
