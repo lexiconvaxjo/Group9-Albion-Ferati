@@ -147,7 +147,7 @@ namespace MyForum.Repository
                             Topic = x.Topic,
                             Username = x.Username,
                             Content = x.Content,
-                            PostComments = 
+                            PostComments = x.PostComments
                         }).FirstOrDefault();
             
 
