@@ -53,6 +53,8 @@ namespace ForumProject.Controllers
                 ThreadContent = vm.Content,
                 Section = _context.Sections.Where(x => x.Id.Equals(vm.SectionId)).FirstOrDefault()
             };
+
+            var ok = 0;
             
             _context.Threads.Add(thread);
             _context.SaveChanges();
