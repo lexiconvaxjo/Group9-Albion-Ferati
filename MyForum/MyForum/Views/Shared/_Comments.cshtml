@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MyForum.Models.CommentViewModel>
+
+@{
+    ViewBag.Title = "_Comments";
+}
+
+<h2>_Comments</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserThatCommented)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentContent)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserThatCommented)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentContent)
+        </td>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <td>
+                @Html.ActionLink("Delete", "DeleteComment", new { id = item.Id })
+            </td>
+        }
+    </tr>
+}
+
+</table>

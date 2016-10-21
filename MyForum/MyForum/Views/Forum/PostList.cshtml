@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MyForum.Models.PostViewModel>
+
+@{
+    ViewBag.Title = "PostList";
+}
+
+<h2>PostList</h2>
+<p>
+    @Html.ActionLink("Create New", "AddPost", new { @id = Model.FirstOrDefault().SectionId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PostTopic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserThatPosted)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.PostTopic, "Post", new { @id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserThatPosted)
+            </td>
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Delete", "DeletePost", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
