@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" name="ThreadId" value="@ViewBag.threadId" />
+    @Html.TextBoxFor(x => x.ThreadId, new { @type = "hidden" })
     <div class="form-horizontal">
         <h4>ReplyViewModel</h4>
         <hr />

@@ -64,8 +64,11 @@ namespace ForumProject.Controllers
 
         public ActionResult Reply(int id)
         {
-            ViewBag.threadId = id;
-            return View();
+            var reply = new ReplyViewModel
+            {
+                ThreadId = id
+            };
+            return View(reply);
         }
 
         [HttpPost]
