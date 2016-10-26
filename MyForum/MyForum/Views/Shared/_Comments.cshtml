@@ -1,37 +1,36 @@
-﻿@model IEnumerable<MyForum.Models.CommentViewModel>
+﻿@model IEnumerable<MyForum.Models.Comment>
 
 @{
     ViewBag.Title = "_Comments";
 }
+<div id="commentBody">
+    <table class="table" id="comment">
 
-<h2>_Comments</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserThatCommented)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CommentContent)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserThatCommented)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommentContent)
-        </td>
-        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        @foreach (var item in Model)
         {
-            <td>
-                @Html.ActionLink("Delete", "DeleteComment", new { id = item.Id })
-            </td>
+            <tr class="col-sm-12">
+                <th class="col-sm-2">
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </th>
+                <td class="col-sm-9">
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <td class="col-sm-1">
+                        @Html.ActionLink("Delete", "DeleteComment", new { id = item.Id })
+                    </td>
+                }
+            </tr>
         }
-    </tr>
-}
 
-</table>
+    </table>
+</div>
+
+<style>
+    #comment {
+        margin-bottom: 5px;
+        border: none;
+        background-color: lightgray;
+    }
+</style>

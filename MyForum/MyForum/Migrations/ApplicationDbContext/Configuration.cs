@@ -14,7 +14,6 @@ namespace MyForum.Migrations.ApplicationDbContext
         {
             AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Migrations\ApplicationDbContext";
-            ContextKey = "MyForum.Models.ApplicationDbContext";
         }
 
         protected override void Seed(MyForum.Models.ApplicationDbContext context)
@@ -32,19 +31,19 @@ namespace MyForum.Migrations.ApplicationDbContext
             //    );
             //
 
-            //var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            //string[] roleNames = { "Admin", "Member" };
-            //IdentityResult roleResult;
-            //foreach (var roleName in roleNames)
-            //{
-            //    if (!RoleManager.RoleExists(roleName))
-            //    {
-            //        roleResult = RoleManager.Create(new IdentityRole(roleName));
-            //    }
-            //}
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            string[] roleNames = { "Admin", "Member" };
+            IdentityResult roleResult;
+            foreach (var roleName in roleNames)
+            {
+                if (!RoleManager.RoleExists(roleName))
+                {
+                    roleResult = RoleManager.Create(new IdentityRole(roleName));
+                }
+            }
 
-            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            //UserManager.AddToRole("0581aa88-7f4b-4c45-bffd-7268fce5b8f2", "Admin");
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserManager.AddToRole("0c8da74d-66bf-44da-b814-e55b0ef3dc96", "Admin");
         }
     }
 }

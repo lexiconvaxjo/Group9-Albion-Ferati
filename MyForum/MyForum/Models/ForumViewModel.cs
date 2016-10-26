@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -46,7 +47,7 @@ namespace MyForum.Models
         public string UserName { get; set; }
 
         public string Body { get; set; }
-        
+
         public bool Deleted { get; set; }
 
         public Post Post { get; set; }
@@ -73,8 +74,10 @@ namespace MyForum.Models
 
         public string SectionId { get; set; }
 
+        [Display(Name ="Topic")]
         public string PostTopic { get; set; }
 
+        [Display(Name ="Content")]
         public string postContent { get; set; }
 
         public string UserThatPosted { get; set; }

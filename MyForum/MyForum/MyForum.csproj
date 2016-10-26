@@ -211,26 +211,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ApplicationDbContext\201610051006373_InitialCreate.cs" />
-    <Compile Include="Migrations\ApplicationDbContext\201610051006373_InitialCreate.Designer.cs">
-      <DependentUpon>201610051006373_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ApplicationDbContext\201610121650099_User.cs" />
-    <Compile Include="Migrations\ApplicationDbContext\201610121650099_User.Designer.cs">
-      <DependentUpon>201610121650099_User.cs</DependentUpon>
+    <Compile Include="Migrations\ApplicationDbContext\201610221655080_User.cs" />
+    <Compile Include="Migrations\ApplicationDbContext\201610221655080_User.Designer.cs">
+      <DependentUpon>201610221655080_User.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContext\Configuration.cs" />
-    <Compile Include="Migrations\ForumDbContext\201610050759087_Forum.cs" />
-    <Compile Include="Migrations\ForumDbContext\201610050759087_Forum.Designer.cs">
-      <DependentUpon>201610050759087_Forum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ForumDbContext\201610050815467_Forum2.cs" />
-    <Compile Include="Migrations\ForumDbContext\201610050815467_Forum2.Designer.cs">
-      <DependentUpon>201610050815467_Forum2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ForumDbContext\201610051009290_Forum3.cs" />
-    <Compile Include="Migrations\ForumDbContext\201610051009290_Forum3.Designer.cs">
-      <DependentUpon>201610051009290_Forum3.cs</DependentUpon>
+    <Compile Include="Migrations\ForumDbContext\201610221700550_Forum1.cs" />
+    <Compile Include="Migrations\ForumDbContext\201610221700550_Forum1.Designer.cs">
+      <DependentUpon>201610221700550_Forum1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ForumDbContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,7 +256,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -330,20 +320,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ApplicationDbContext\201610051006373_InitialCreate.resx">
-      <DependentUpon>201610051006373_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ApplicationDbContext\201610221655080_User.resx">
+      <DependentUpon>201610221655080_User.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ApplicationDbContext\201610121650099_User.resx">
-      <DependentUpon>201610121650099_User.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ForumDbContext\201610050759087_Forum.resx">
-      <DependentUpon>201610050759087_Forum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ForumDbContext\201610050815467_Forum2.resx">
-      <DependentUpon>201610050815467_Forum2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ForumDbContext\201610051009290_Forum3.resx">
-      <DependentUpon>201610051009290_Forum3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ForumDbContext\201610221700550_Forum1.resx">
+      <DependentUpon>201610221700550_Forum1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

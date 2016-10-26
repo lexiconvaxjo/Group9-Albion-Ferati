@@ -37,6 +37,18 @@ namespace MyForum.Repository
             return sectionForView;
         }
 
+        public void AddNewSection(SectionViewModel model)
+        {
+            Section section = new Section
+            {
+                Id = GenerateSecurityStamp(),
+                Title = model.Title,
+                Description = model.ShortDescription
+            };
+
+            _context.Sections.Add(section);
+            Save();
+        }
 
         /// <summary>
         /// Method to get post list of the chosen section
@@ -59,60 +71,19 @@ namespace MyForum.Repository
 
             return postForView;
         }
-
-        public List<PostViewModel> GetAllPosts()
-        {
-            var query = from x in _context.Posts
-                        select new PostViewModel()
-                        {
-                            Id = x.Id,
-                            SectionId = x.SectionId,
-                            UserThatPosted = x.Username,
-                            PostTopic = x.Topic,
-                            postContent = x.Content
-                        };
-
-            List<PostViewModel> postForView = query.ToList();
-
-            return postForView;
-        }
         
-
-        public List<CommentViewModel> GetComments()
-        {
-            var query = from x in _context.Comments
-                        select new CommentViewModel()
-                        {
-                            Id = x.Id,
-                            PostId = x.PostId,
-                            CommentContent = x.Body,
-                            UserThatCommented = x.UserName
-                        };
-
-            List<CommentViewModel> commentForView = query.ToList();
-
-            return commentForView;
-        }
+        
 
         /// <summary>
         /// Method to comments of a post
         /// </summary>
         /// <param name="post"></param>
         /// <returns>comments through viewmodel</returns>
-        public List<CommentViewModel> GetPostComments(ThisPostViewModel post)
+        public List<Comment> GetPostComments(Post post)
         {
-            var query = from x in _context.Comments.Where(x => x.PostId == post.Id)
-                        select new CommentViewModel()
-                        {
-                            Id = x.Id,
-                            PostId = x.PostId,
-                            UserThatCommented = x.UserName,
-                            CommentContent = x.Body
-                        };
+            var comments = _context.Comments.Where(x => x.PostId == post.Id).ToList();
 
-            List<CommentViewModel> commentForView = query.ToList();
-
-            return commentForView;
+            return comments;
         }
 
 
@@ -123,25 +94,22 @@ namespace MyForum.Repository
             return _context.Sections.Find(secId);
         }
 
-        public void AddNewSection(Section section)
+        
+
+
+
+        public Post GetPostById(string postId)
         {
-            _context.Sections.Add(section);
-            Save();
+            var post = _context.Posts.Find(postId);
+
+            return post;
         }
 
 
-
-        public ThisPostViewModel GetPostById(string postId)
+        public ThisPostViewModel GetPostVmById(string postId)
         {
             var query = _context.Posts.Include("PostComments").Where(x => x.Id == postId)
-                        .Select(x => new Post
-                        {
-                            Id = x.Id,
-                            Topic = x.Topic,
-                            Username = x.Username,
-                            Content = x.Content,
-                            PostComments = x.PostComments
-                        }).Select(x => new ThisPostViewModel
+                        .Select(x => new ThisPostViewModel
                         {
                             Id = x.Id,
                             Topic = x.Topic,
@@ -178,6 +146,7 @@ namespace MyForum.Repository
 
         public void AddComment(Comment comment)
         {
+            comment.Id = GenerateSecurityStamp();
             _context.Comments.Add(comment);
 
             Save();
@@ -221,5 +190,17 @@ namespace MyForum.Repository
         }
 
         #endregion dispose
+
+        public static string GenerateSecurityStamp()
+        {
+            Random rand = new Random(DateTime.Now.Millisecond);
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            char[] hash = new char[15];
+            for (int i = 0; i < 15; i++)
+            {
+                var tempChar = chars[rand.Next(chars.Length)]; hash[i] = tempChar;
+            }
+            return string.Join("", hash);
+        }
     }
 }

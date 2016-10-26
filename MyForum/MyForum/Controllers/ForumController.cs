@@ -10,6 +10,8 @@ namespace MyForum.Controllers
 {
     public class ForumController : Controller
     {
+
+        #region MustHave
         private IForumRepository _forumRepository;
 
         public ForumController()
@@ -21,10 +23,9 @@ namespace MyForum.Controllers
         {
             _forumRepository = forumRepository;
         }
-
+        #endregion
         
-
-        #region GET Actions
+        #region Forum
         // GET: Forum
         public ActionResult Index()
         {
@@ -32,36 +33,11 @@ namespace MyForum.Controllers
 
             return View(sections);
         }
-
-        [Authorize(Roles ="Admin")]
-        public ActionResult AddSection()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public ActionResult AddSection(SectionViewModel model)
-        {
-            
-            Section section = new Section
-            {
-                Id = GenerateSecurityStamp(),
-                Title = model.Title,
-                Description = model.ShortDescription
-            };
-
-            _forumRepository.AddNewSection(section);
-            var sectionList = GetSections();
-
-            return RedirectToAction("Index", sectionList);
-        }
-
-
+        
         public ActionResult PostList(string id)
         {
             var postList = GetSectionPosts(id);
-            
+
             return View(postList);
         }
 
@@ -71,18 +47,8 @@ namespace MyForum.Controllers
 
             Comments(post);
 
-            return View(post);
+            return View(_forumRepository.GetPostVmById(id));
         }
-
-        [ChildActionOnly]
-        public ActionResult Comments(ThisPostViewModel post)
-        {
-            var postComments = _forumRepository.GetPostComments(post).ToList();
-
-            return View(postComments);
-        }
-
-        #endregion
 
         public ActionResult AddPost(string id)
         {
@@ -114,37 +80,22 @@ namespace MyForum.Controllers
             return View();
         }
 
-
-
-        [Authorize(Roles = "Admin")]
-        public ActionResult DeletePost(string id)
+        [HttpPost]
+        public ActionResult AddReply(Comment com)
         {
-            var post = _forumRepository.GetPostById(id);
-            return View(post);
+            _forumRepository.AddComment(com);
+            return RedirectToAction("Post", com.PostId);
         }
 
-        //[Authorize(Roles = "Admin")]
-        //[HttpPost, ActionName("DeletePost")]
-        //public ActionResult DeletePostConfirmed(string id)
-        //{
-        //    var post = _forumRepository.GetPostById(id);
 
-        //    var secId = post.SectionId;
+        [ChildActionOnly]
+        public ActionResult Comments(Post post)
+        {
+            var postComments = _forumRepository.GetPostComments(post).ToList();
 
-        //    if (post == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    _forumRepository.DeletePost(id);
-
-        //    _forumRepository.Save();
-
-        //    return View("PostList", GetSectionPosts(_forumRepository.GetSectionById(secId)));
-        //}
-
-
-
+            return View(postComments);
+        }
+        
         public ActionResult AddComment(string id)
         {
             var com = new CommentViewModel
@@ -170,6 +121,55 @@ namespace MyForum.Controllers
             return RedirectToAction("Post", new { id = com.PostId });
         }
 
+        #endregion
+
+        #region Admin
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AddSection()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult AddSection(SectionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _forumRepository.AddNewSection(model);
+
+                return RedirectToAction("Index", GetSections());
+            }
+
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeletePost(string id)
+        {
+            var post = _forumRepository.GetPostById(id);
+            return View(post);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost, ActionName("DeletePost")]
+        public ActionResult DeletePostConfirmed(string id)
+        {
+            var post = _forumRepository.GetPostById(id);
+
+            var secId = post.SectionId;
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            _forumRepository.DeletePost(id);
+
+            return View("PostList", GetSectionPosts(_forumRepository.GetSectionById(secId).Id));
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteComment(string id)
         {
@@ -192,10 +192,10 @@ namespace MyForum.Controllers
 
             _forumRepository.DeleteComment(id);
 
-            _forumRepository.Save();
-
-            return RedirectToAction("Post", new { id = postId});
+            return RedirectToAction("Post", new { id = postId });
         }
+
+        #endregion
 
         #region Helpers
 
@@ -208,12 +208,12 @@ namespace MyForum.Controllers
         {
             return _forumRepository.GetSectionPosts(id);
         }
-
-
-        public List<CommentViewModel> GetPostComments(ThisPostViewModel post)
+        
+        public List<Comment> GetPostComments(Post post)
         {
             return _forumRepository.GetPostComments(post);
         }
+
 
         public static string GenerateSecurityStamp()
         {
